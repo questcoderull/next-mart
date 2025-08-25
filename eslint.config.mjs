@@ -9,6 +9,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+// ESLint config
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals"),
   {
@@ -22,4 +23,13 @@ const eslintConfig = [
   },
 ];
 
-export default eslintConfig;
+// Tailwind + PostCSS config
+const postcssConfig = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+//  Export correctly
+export { eslintConfig, postcssConfig };
