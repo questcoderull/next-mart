@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 
 export async function GET() {
-  const data = await dbConnect("pratice_data_for_nextjs").find({}).toArray();
+  const data = await dbConnect("watches").find({}).toArray();
 
   return Response.json(data);
 }

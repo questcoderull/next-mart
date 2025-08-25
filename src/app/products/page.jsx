@@ -1,103 +1,51 @@
 import Link from "next/link";
 import React from "react";
 
-const page = () => {
-  const data = [
-    {
-      id: 1,
-      title: "Wireless Headphones",
-      description:
-        "High-quality over-ear wireless headphones with noise cancellation.",
-      price: 120,
-      detailsLink: "/products/1",
-    },
-    {
-      id: 2,
-      title: "Smart Watch",
-      description:
-        "Track your fitness and stay connected with this stylish smartwatch.",
-      price: 85,
-      detailsLink: "/products/2",
-    },
-    {
-      id: 3,
-      title: "Gaming Mouse",
-      description: "Ergonomic RGB gaming mouse with customizable buttons.",
-      price: 45,
-      detailsLink: "/products/3",
-    },
-    {
-      id: 4,
-      title: "Bluetooth Speaker",
-      description:
-        "Portable Bluetooth speaker with powerful sound and deep bass.",
-      price: 60,
-      detailsLink: "/products/4",
-    },
-    {
-      id: 5,
-      title: "4K Monitor",
-      description: "27-inch 4K UHD monitor with stunning color accuracy.",
-      price: 350,
-      detailsLink: "/products/5",
-    },
-    {
-      id: 6,
-      title: "Mechanical Keyboard",
-      description: "RGB backlit mechanical keyboard with blue switches.",
-      price: 75,
-      detailsLink: "/products/6",
-    },
-    {
-      id: 7,
-      title: "Laptop Backpack",
-      description:
-        "Water-resistant backpack with multiple compartments for 15-inch laptops.",
-      price: 40,
-      detailsLink: "/products/7",
-    },
-    {
-      id: 8,
-      title: "Smartphone",
-      description:
-        "Latest smartphone with OLED display and powerful processor.",
-      price: 899,
-      detailsLink: "/products/8",
-    },
-    {
-      id: 9,
-      title: "External Hard Drive",
-      description: "2TB portable external hard drive for backup and storage.",
-      price: 70,
-      detailsLink: "/products/9",
-    },
-    {
-      id: 10,
-      title: "Wireless Charger",
-      description:
-        "Fast wireless charger compatible with iPhone and Android devices.",
-      price: 30,
-      detailsLink: "/products/10",
-    },
-  ];
+const page = async () => {
+  //   mongodb er data get korar try kortechi.
 
+  const res = await fetch("http://localhost:3000/api/items");
+  const data = await res.json();
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Services page</h1>
-      <div className="grid grid-cols-3 gap-5">
-        {data.map((d) => {
-          return (
-            <div>
-              <h3>{d.title}</h3>
-              <p>{d.description}</p>
-              <Link href={d.detailsLink}>
-                <button className="border border-red-400 py-3 px-7 rounded-xl cursor-pointer">
-                  See Details
-                </button>
-              </Link>
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center mb-8 text-primary">
+        Our Watch Collection
+      </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {data.map((watch) => (
+          <div
+            key={watch.id}
+            className="card bg-base-100 shadow-xl border border-gray-200 rounded-xl hover:shadow-2xl transition duration-300"
+          >
+            <figure>
+              <img
+                src={watch.image}
+                alt={watch.name}
+                className="h-60 w-full object-cover rounded-t-xl"
+              />
+            </figure>
+
+            <div className="card-body">
+              <h2 className="card-title text-xl font-bold text-secondary">
+                {watch.name}
+              </h2>
+              <p className="text-gray-600 font-medium">{watch.brand}</p>
+              <p className="text-lg font-semibold text-primary">
+                ${watch.price}
+              </p>
+
+              <div className="card-actions mt-4">
+                <Link
+                  href={`/products/${watch.id}`}
+                  className="btn btn-primary btn-sm w-full"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );
