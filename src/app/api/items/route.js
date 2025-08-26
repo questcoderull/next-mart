@@ -3,7 +3,7 @@ import dbConnect from "@/lib/dbConnect";
 export async function GET() {
   // Random 10 items
   const data = await dbConnect("watches")
-    .aggregate([{ $sample: { size: 10 } }])
+    .aggregate([{ $sample: { size: 20 } }])
     .toArray();
 
   return Response.json(data);
@@ -11,9 +11,6 @@ export async function GET() {
 
 export async function POST(req) {
   const postedData = await req.json();
-  const result = await dbConnect("pratice_data_for_nextjs").insertOne(
-    postedData
-  );
-
+  const result = await dbConnect("watches").insertOne(postedData);
   return Response.json(result);
 }
