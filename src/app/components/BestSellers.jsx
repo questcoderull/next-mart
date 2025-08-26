@@ -24,7 +24,16 @@ const BestSellers = () => {
   }, []);
 
   if (loading) {
-    return <p className="text-center text-lg py-8">Loading best sellers...</p>;
+    return (
+      <>
+        <h2 className="text-4xl font-bold text-center mb-12 text-primary mt-10">
+          Best Selling Watches
+        </h2>
+        <p className="text-center text-2xl text-accent py-8">
+          Loading best sellers Watches...
+        </p>
+      </>
+    );
   }
 
   return (

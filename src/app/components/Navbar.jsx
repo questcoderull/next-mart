@@ -7,7 +7,7 @@ const Navbar = () => {
   const pathNmae = usePathname();
   if (!pathNmae.includes("dashboard")) {
     return (
-      <div className="w-full bg-base-100 shadow-sm">
+      <div className="w-full bg-base-100/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div className="navbar max-w-7xl mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
