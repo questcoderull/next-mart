@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
       <body className={`${outfit.className} antialiased`}>
         <Navbar></Navbar>
 
-        <main className="h-screen  place-content-center place-items-center">
+        <main className="min-h-screen place-content-center place-items-center">
           {children}
         </main>
 

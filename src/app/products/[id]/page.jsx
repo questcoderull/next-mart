@@ -1,104 +1,76 @@
+import dbConnect from "@/lib/dbConnect";
+import { ObjectId } from "mongodb";
 import Link from "next/link";
-import React from "react";
 
-const page = ({ params }) => {
-  const id = params.id;
+const ProductDetails = async ({ params }) => {
+  const { id } = params;
 
-  const data = [
-    {
-      id: 1,
-      title: "Wireless Headphones",
-      description:
-        "High-quality over-ear wireless headphones with noise cancellation.",
-      price: 120,
-      detailsLink: "/products/1",
-    },
-    {
-      id: 2,
-      title: "Smart Watch",
-      description:
-        "Track your fitness and stay connected with this stylish smartwatch.",
-      price: 85,
-      detailsLink: "/products/2",
-    },
-    {
-      id: 3,
-      title: "Gaming Mouse",
-      description: "Ergonomic RGB gaming mouse with customizable buttons.",
-      price: 45,
-      detailsLink: "/products/3",
-    },
-    {
-      id: 4,
-      title: "Bluetooth Speaker",
-      description:
-        "Portable Bluetooth speaker with powerful sound and deep bass.",
-      price: 60,
-      detailsLink: "/products/4",
-    },
-    {
-      id: 5,
-      title: "4K Monitor",
-      description: "27-inch 4K UHD monitor with stunning color accuracy.",
-      price: 350,
-      detailsLink: "/products/5",
-    },
-    {
-      id: 6,
-      title: "Mechanical Keyboard",
-      description: "RGB backlit mechanical keyboard with blue switches.",
-      price: 75,
-      detailsLink: "/products/6",
-    },
-    {
-      id: 7,
-      title: "Laptop Backpack",
-      description:
-        "Water-resistant backpack with multiple compartments for 15-inch laptops.",
-      price: 40,
-      detailsLink: "/products/7",
-    },
-    {
-      id: 8,
-      title: "Smartphone",
-      description:
-        "Latest smartphone with OLED display and powerful processor.",
-      price: 899,
-      detailsLink: "/products/8",
-    },
-    {
-      id: 9,
-      title: "External Hard Drive",
-      description: "2TB portable external hard drive for backup and storage.",
-      price: 70,
-      detailsLink: "/products/9",
-    },
-    {
-      id: 10,
-      title: "Wireless Charger",
-      description:
-        "Fast wireless charger compatible with iPhone and Android devices.",
-      price: 30,
-      detailsLink: "/products/10",
-    },
-  ];
+  // MongoDB theke ekta specific product khuja
+  const product = await dbConnect("watches").findOne({
+    _id: new ObjectId(id),
+  });
 
-  const singleDat = data.find((d) => d.id == id);
+  if (!product) {
+    return (
+      <h1 className="text-center text-2xl font-bold">Product not found</h1>
+    );
+  }
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Product details page</h1>
-      <p className="text-xl font-bold text-red-500">Product's Id: {id}</p>
+    <div className="max-w-4xl mx-auto p-8">
+      <div className="card lg:card-side bg-base-100 shadow-2xl rounded-2xl overflow-hidden">
+        {/* Image section */}
+        <figure className="w-full lg:w-1/2">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-[500px] w-full object-cover"
+          />
+        </figure>
 
-      <h3>{singleDat.title}</h3>
-      <h3>{singleDat.description}</h3>
-      <h3>{singleDat.price}</h3>
-      <Link href="/products">
-        <button className="border border-red-400 py-3 px-7 rounded-xl cursor-pointer">
-          Back to products
-        </button>
-      </Link>
+        {/* Content section */}
+        <div className="card-body lg:w-1/2 p-8 space-y-4">
+          <h2 className="card-title text-4xl font-bold text-primary">
+            {product.name}
+          </h2>
+          <p className="text-lg font-semibold text-secondary">
+            Brand: {product.brand}
+          </p>
+          <p className="text-gray-300 text-base">Type: {product.type}</p>
+          <p className="text-gray-300 text-base">Color: {product.color}</p>
+
+          <p className="text-3xl font-extrabold text-primary mt-6">
+            ${product.price}
+          </p>
+
+          <div className="card-actions mt-8 flex gap-4">
+            <button className="btn btn-secondary btn-lg rounded-xl">
+              Add to Cart
+            </button>
+            <button className="btn btn-primary btn-lg rounded-xl">
+              Buy Now
+            </button>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Discover timeless craftsmanship with the {product.name}. Designed
+              by <span className="font-semibold">{product.brand}</span>, this{" "}
+              {product.type.toLowerCase()} watch blends elegance and durability.
+              Perfect for any occasion.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Back link */}
+      <div className="text-center mt-6">
+        <Link href="/products" className="link link-primary text-lg">
+          ← Back to products
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default page;
+export default ProductDetails;
