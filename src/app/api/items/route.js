@@ -1,7 +1,10 @@
 import dbConnect from "@/lib/dbConnect";
 
 export async function GET() {
-  const data = await dbConnect("watches").find({}).toArray();
+  // Random 10 items
+  const data = await dbConnect("watches")
+    .aggregate([{ $sample: { size: 10 } }])
+    .toArray();
 
   return Response.json(data);
 }
