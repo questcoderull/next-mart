@@ -4,7 +4,7 @@ const AboutPage = () => {
       {/* Image on top */}
       <div className="w-full h-96 mb-6">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-OTB5PipERn0wVP-hbsY55Cj1UW5sXqh6A&s"
+          src="https://i.ibb.co.com/cc7wpSMZ/w-for-abut-banner.jpg"
           alt="About Us"
           className="object-cover w-full h-full rounded-xl shadow-lg"
         />

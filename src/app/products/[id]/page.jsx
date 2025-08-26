@@ -54,10 +54,15 @@ const ProductDetails = async ({ params }) => {
 
           <div className="mt-6">
             <p className="text-sm text-gray-300 leading-relaxed">
-              Discover timeless craftsmanship with the {product.name}. Designed
-              by <span className="font-semibold">{product.brand}</span>, this{" "}
-              {product.type.toLowerCase()} watch blends elegance and durability.
-              Perfect for any occasion.
+              Discover timeless craftsmanship with the{" "}
+              <span className="text-secondary">{product.name}</span>. Designed
+              by{" "}
+              <span className="font-semibold text-accent">{product.brand}</span>
+              , this{" "}
+              <span className="text-secondary">
+                {product.type.toLowerCase()}
+              </span>{" "}
+              watch blends elegance and durability. Perfect for any occasion.
             </p>
           </div>
         </div>
