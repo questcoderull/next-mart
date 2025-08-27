@@ -29,9 +29,16 @@ const BestSellers = () => {
         <h2 className="text-4xl font-bold text-center mb-12 text-primary mt-10">
           Best Selling Watches
         </h2>
-        <p className="text-center text-2xl text-accent py-8">
-          Loading best sellers Watches...
-        </p>
+        <div className="flex gap-2.5 items-center justify-center py-8">
+          <div
+            className="animate-spin rounded-full 
+          h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 
+          border-4 border-accent border-t-transparent"
+          ></div>
+          <p className="text-center text-2xl text-accent mt-4">
+            Loading best selling Watches...
+          </p>
+        </div>
       </>
     );
   }
