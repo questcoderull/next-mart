@@ -31,7 +31,9 @@ const Hero = async () => {
               Shop Now
             </button>
           </Link>
-          {session?.user ? (
+
+          {/* authentication impiliment korar somoy dekhar jonno ei code gulu likhecilam. ekhon delete na kore comment kore rekhe dicci, porobortite kaje lagthe pare  */}
+          {/* {session?.user ? (
             <LogOutButton></LogOutButton>
           ) : (
             <LogingButton></LogingButton>
@@ -41,7 +43,7 @@ const Hero = async () => {
             Use info from client component
           </p>
           <UserInfo></UserInfo>
-          {JSON.stringify(session)}
+          {JSON.stringify(session)} */}
         </div>
       </div>
     </div>

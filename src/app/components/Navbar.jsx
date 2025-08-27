@@ -3,8 +3,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import LogingButton from "./LogingButton";
+import { useSession } from "next-auth/react";
+import LogOutButton from "./LogOutButton";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const pathNmae = usePathname();
   if (!pathNmae.includes("dashboard")) {
     return (
@@ -46,9 +49,14 @@ const Navbar = () => {
                 <li>
                   <Link href="/about">About</Link>
                 </li>
-                <li>
+                {session?.user && (
+                  <li>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </li>
+                )}
+                {/* <li>
                   <Link href="/dashboard">Dashboard</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
             <Link href="/" className="btn btn-ghost text-xl">
@@ -66,14 +74,41 @@ const Navbar = () => {
               <li>
                 <Link href="/about">About</Link>
               </li>
-              <li>
+              {session?.user && (
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+              )}
+              {/* <li>
                 <Link href="/dashboard">Dashboard</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="navbar-end">
             <ul className="flex justify-between gap-5">
-              <li>
+              {session?.user ? (
+                <li>
+                  <button className="btn btn-secondary rounded-lg">
+                    <LogOutButton></LogOutButton>
+                  </button>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <button className="btn btn-secondary rounded-lg">
+                      <LogingButton></LogingButton>
+                    </button>
+                  </li>
+                  <li>
+                    <Link href="/register">
+                      <button className="btn btn-accent rounded-lg">
+                        Register
+                      </button>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* <li>
                 <button className="btn btn-secondary rounded-lg">
                   <LogingButton></LogingButton>
                 </button>
@@ -84,7 +119,7 @@ const Navbar = () => {
                     Register
                   </button>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
