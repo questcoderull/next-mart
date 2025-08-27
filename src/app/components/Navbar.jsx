@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import LogingButton from "./LogingButton";
 
 const Navbar = () => {
   const pathNmae = usePathname();
@@ -73,11 +74,9 @@ const Navbar = () => {
           <div className="navbar-end">
             <ul className="flex justify-between gap-5">
               <li>
-                <Link href="/login">
-                  <button className="btn btn-secondary rounded-lg">
-                    Login
-                  </button>
-                </Link>
+                <button className="btn btn-secondary rounded-lg">
+                  <LogingButton></LogingButton>
+                </button>
               </li>
               <li>
                 <Link href="/register">

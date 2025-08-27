@@ -1,8 +1,8 @@
-import dbConnect from "@/lib/dbConnect";
+import dbConnect, { collectionName } from "@/lib/dbConnect";
 
 export async function GET() {
   try {
-    const data = await dbConnect("watches")
+    const data = await dbConnect(collectionName.watches)
       .find({})
       .sort({ sales: -1 })
       .limit(6)

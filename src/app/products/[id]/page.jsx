@@ -1,4 +1,4 @@
-import dbConnect from "@/lib/dbConnect";
+import dbConnect, { collectionName } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
 
@@ -6,7 +6,7 @@ const ProductDetails = async ({ params }) => {
   const { id } = params;
 
   // MongoDB theke ekta specific product khuja
-  const product = await dbConnect("watches").findOne({
+  const product = await dbConnect(collectionName.watches).findOne({
     _id: new ObjectId(id),
   });
 

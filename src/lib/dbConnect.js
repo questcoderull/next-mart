@@ -1,5 +1,10 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
+export const collectionName = {
+  USER: "user",
+  watches: "watches",
+};
+
 function dbConnect(collectionName) {
   const uri = process.env.MONGO_URI;
 

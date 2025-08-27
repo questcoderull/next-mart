@@ -1,8 +1,8 @@
-import dbConnect from "@/lib/dbConnect";
+import dbConnect, { collectionName } from "@/lib/dbConnect";
 
 export async function GET() {
   // Random 10 items
-  const data = await dbConnect("watches")
+  const data = await dbConnect(collectionName.watches)
     .aggregate([{ $sample: { size: 20 } }])
     .toArray();
 
@@ -11,6 +11,6 @@ export async function GET() {
 
 export async function POST(req) {
   const postedData = await req.json();
-  const result = await dbConnect("watches").insertOne(postedData);
+  const result = await dbConnect(collectionName.watches).insertOne(postedData);
   return Response.json(result);
 }

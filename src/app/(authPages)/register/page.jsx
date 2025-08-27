@@ -1,6 +1,24 @@
+"use client";
+import { registerUser } from "@/app/actions/auth/registerUser";
 import React from "react";
 
-const page = () => {
+const Register = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const username = form.name.value;
+    const password = form.password.value;
+    const role = "user";
+
+    const payload = {
+      username,
+      password,
+      role,
+    };
+    const result = await registerUser(payload);
+    console.log(result);
+    form.reset();
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -14,16 +32,26 @@ const page = () => {
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <fieldset className="fieldset">
+            <form onSubmit={handleRegister} className="fieldset">
               <label className="label">Email</label>
-              <input type="email" className="input" placeholder="Email" />
+              <input
+                type="text"
+                className="input"
+                name="name"
+                placeholder="username"
+              />
               <label className="label">Password</label>
-              <input type="password" className="input" placeholder="Password" />
+              <input
+                type="password"
+                className="input"
+                name="password"
+                placeholder="Password"
+              />
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>
               <button className="btn btn-neutral mt-4">Register</button>
-            </fieldset>
+            </form>
           </div>
         </div>
       </div>
@@ -31,4 +59,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Register;

@@ -1,7 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import LogingButton from "./LogingButton";
+import UserInfo from "./UserInfo";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOption";
+import LogOutButton from "./LogOutButton";
 
-const Hero = () => {
+const Hero = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <div className="relative w-full h-screen max-w-[2000px] mx-auto">
       {/* Background Image */}
@@ -25,6 +31,17 @@ const Hero = () => {
               Shop Now
             </button>
           </Link>
+          {session?.user ? (
+            <LogOutButton></LogOutButton>
+          ) : (
+            <LogingButton></LogingButton>
+          )}
+
+          <p className="text-2xl text-secondary">
+            Use info from client component
+          </p>
+          <UserInfo></UserInfo>
+          {JSON.stringify(session)}
         </div>
       </div>
     </div>

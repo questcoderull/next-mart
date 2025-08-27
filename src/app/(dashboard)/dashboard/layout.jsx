@@ -1,4 +1,5 @@
 "use client";
+import LogOutButton from "@/app/components/LogOutButton";
 import Link from "next/link";
 import React from "react";
 
@@ -89,12 +90,9 @@ const DashboardLayout = ({ children }) => {
 
           {/* Logout */}
           <div className="mt-6">
-            <Link
-              href="/logout"
-              className="block text-center bg-red-600 hover:bg-red-700 transition text-white py-2 rounded-lg font-semibold"
-            >
-              Logout
-            </Link>
+            <div className="block text-center bg-red-600 hover:bg-red-700 transition text-white py-2 rounded-lg font-semibold">
+              <LogOutButton></LogOutButton>
+            </div>
           </div>
         </aside>
       </div>
